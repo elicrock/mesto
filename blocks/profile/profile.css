@@ -1,0 +1,30 @@
+.profile {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 30px;
+       column-gap: 30px;
+  padding-top: 40px;
+}
+
+@media screen and (max-width: 1024px) {
+  .profile {
+    /* calc((100vw - Vmin)/(Vmax - Vmin) * (Fmax - Fmin) + Fmin); */
+    max-width: calc((100vw - 320px)/(1024 - 320) * (880 - 282) + 282px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    gap: 26px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile {
+    max-width: 282px;
+    padding: 42px 19px 0;
+  }
+}
