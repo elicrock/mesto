@@ -1,8 +1,10 @@
 .element {
   width: 282px;
+  display: -webkit-flex;
   display: flex;
   justify-self: center;
-  flex-direction: column;
+  -webkit-flex-direction: column;
+          flex-direction: column;
   border-radius: 10px;
   overflow: hidden;
 }

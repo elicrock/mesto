@@ -38,7 +38,8 @@
   left: 50%;
   margin-top: -1px;
   margin-left: -11px;
-  transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 @media screen and (max-width: 768px) {

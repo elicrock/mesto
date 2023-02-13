@@ -1,10 +1,13 @@
 .profile {
   max-width: 880px;
   margin: 0 auto;
+  display: -webkit-flex;
   display: flex;
-  align-items: center;
+  -webkit-align-items: center;
+          align-items: center;
   -moz-column-gap: 30px;
-       column-gap: 30px;
+       -webkit-column-gap: 30px;
+          column-gap: 30px;
   padding-top: 40px;
 }
 
@@ -17,7 +20,8 @@
 
 @media screen and (max-width: 768px) {
   .profile {
-    flex-direction: column;
+    -webkit-flex-direction: column;
+            flex-direction: column;
     gap: 26px;
   }
 }

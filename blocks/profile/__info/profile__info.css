@@ -1,5 +1,6 @@
 .profile__info {
   max-width: 460px;
+  display: -ms-grid;
   display: grid;
   grid-template-areas:
   "profile__title profile__edit-button"
