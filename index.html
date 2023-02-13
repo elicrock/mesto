@@ -5,7 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./pages/index.css">
-  <script src="./scripts/index.js" defer></script>
   <title>Mesto</title>
 </head>
 <body class="root">
@@ -82,13 +81,14 @@
       <form class="popup__form" name="profileEdit">
         <h2 class="popup__title">Редактировать профиль</h2>
         <fieldset class="popup__inputs">
-          <input type="text" class="popup__input popup__input-name" placeholder="Имя" required>
-          <input type="text" class="popup__input popup__input-about" placeholder="О себе" required>
+          <input type="text" class="popup__input popup__input_el_name" placeholder="Имя" required>
+          <input type="text" class="popup__input popup__input_el_about" placeholder="О себе" required>
         </fieldset>
         <button class="popup__save-button" type="submit">Сохранить</button>
       </form>
     </div>
   </div>
 
+  <script src="./scripts/index.js" defer></script>
 </body>
 </html>

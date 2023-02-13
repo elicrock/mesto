@@ -1,5 +1,5 @@
 .profile__info {
-  max-width: 460px;
+  width: 70%;
   display: -ms-grid;
   display: grid;
   grid-template-areas:
@@ -18,13 +18,13 @@
 
 @media screen and (max-width: 768px) {
   .profile__info {
-    gap: calc((100vw - 320px)/(768 - 320) * (16 - 14) + 14px) calc((100vw - 320px)/(768 - 320) * (18 - 10) + 10px);
+    gap: calc((100vw - 320px)/(768 - 320) * (16 - 14) + 10px) calc((100vw - 320px)/(768 - 320) * (18 - 10) + 10px);
     justify-content: center;
   }
 }
 
 @media screen and (max-width: 320px) {
   .profile__info {
-    gap: 14px 10px;
+    gap: 6px;
   }
 }

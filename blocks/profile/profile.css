@@ -5,8 +5,10 @@
   display: flex;
   -webkit-align-items: center;
           align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
   -moz-column-gap: 30px;
-       -webkit-column-gap: 30px;
+  -webkit-column-gap: 30px;
           column-gap: 30px;
   padding-top: 40px;
 }
@@ -30,5 +32,6 @@
   .profile {
     max-width: 282px;
     padding: 42px 19px 0;
+    text-align: center;
   }
 }

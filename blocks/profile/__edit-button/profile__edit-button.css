@@ -16,3 +16,18 @@
 .profile__edit-button:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 1024px) {
+  .profile__edit-button {
+    /* calc((100vw - Vmin)/(Vmax - Vmin) * (Fmax - Fmin) + Fmin); */
+    width: calc((100vw - 320px)/(1024 - 320) * (24 - 18) + 18px);
+    height: calc((100vw - 320px)/(1024 - 320) * (24 - 18) + 18px);
+    background-size: calc((100vw - 320px)/(1024 - 320) * (10 - 7.5) + 7.5px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .profile__edit-button {
+    transform: translateX(16px);
+  }
+}
