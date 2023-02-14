@@ -10,8 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupInputName = document.querySelector('.popup__input_el_name');
   const popupInputAbout = document.querySelector('.popup__input_el_about');
 
-  console.dir(popup);
-
   const openForm = function() {
     popup.classList.add('popup_opened');
   };
