@@ -26,7 +26,6 @@
 
 @media screen and (max-width: 320px) {
   .popup__save-button {
-    /* calc((100vw - Vmin)/(Vmax - Vmin) * (Fmax - Fmin) + Fmin); */
     font-size: 14px;
     line-height: 17px;
   }

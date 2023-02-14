@@ -13,7 +13,7 @@
 
 @media screen and (max-width: 1024px) {
   .popup__inputs {
-    padding-top: calc((100vw - 320px)/(1024 - 320) * (54 - 75) + 75px);
+    padding-top: calc((100vw - 320px)/(1024 - 320) * (54 - 70) + 70px);
     padding-bottom: calc((100vw - 320px)/(1024 - 320) * (48 - 45) + 45px);
   }
 }
@@ -21,6 +21,7 @@
 @media screen and (max-width: 320px) {
   .popup__inputs {
     padding-top: 70px;
-    padding-bottom: 40px;
+    padding-bottom: 45px;
+    gap: 25px;
   }
 }

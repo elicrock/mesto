@@ -13,12 +13,12 @@
   .profile__title {
     /* calc((100vw - Vmin)/(Vmax - Vmin) * (Fmax - Fmin) + Fmin); */
     font-size: calc((100vw - 320px)/(768 - 320) * (42 - 27) + 27px);
+    transform: translateX(12px);
   }
 }
 
 @media screen and (max-width: 320px) {
   .profile__title {
     font-size: 27px;
-    transform: translateX(12px);
   }
 }

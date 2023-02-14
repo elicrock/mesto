@@ -25,6 +25,7 @@
     -webkit-flex-direction: column;
             flex-direction: column;
     gap: 26px;
+    text-align: center;
   }
 }
 
@@ -32,6 +33,5 @@
   .profile {
     max-width: 282px;
     padding: 42px 19px 0;
-    text-align: center;
   }
 }
