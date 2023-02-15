@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const profileSubtitle = document.querySelector('.profile__subtitle');
   const profileEditButton = document.querySelector('.profile__edit-button');
   const popup = document.querySelector('.popup');
+  const popupForm = document.querySelector('.popup__form');
   const popupCloseButton = document.querySelector('.popup__close-button');
   const popupInputName = document.querySelector('.popup__input_el_name');
   const popupInputAbout = document.querySelector('.popup__input_el_about');
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     popupInputAbout.value = profileSubtitle.textContent;
   });
 
-  popup.addEventListener('submit', saveForm);
+  popupForm.addEventListener('submit', saveForm);
 
   popupCloseButton.addEventListener('click', closeForm);
 
