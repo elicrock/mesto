@@ -1,4 +1,4 @@
 .popup_opened {
-  display: -webkit-flex;
-  display: flex;
+  visibility: visible;
+  opacity: 1;
 }
