@@ -27,6 +27,7 @@
       <section class="elements">
         <ul class="elements__list">
           <li class="element">
+            <button type="button" class="element__delete-place"></button>
             <img src="./images/karachaevsk.jpg" alt="Карачаевск (фото)" class="element__img">
             <div class="element__caption">
               <h2 class="element__title">Карачаевск</h2>
@@ -34,6 +35,7 @@
             </div>
           </li>
           <li class="element">
+            <button type="button" class="element__delete-place"></button>
             <img src="./images/elbrus.jpg" alt="Гора Эльбрус (фото)" class="element__img">
             <div class="element__caption">
               <h2 class="element__title">Гора Эльбрус</h2>
@@ -41,6 +43,7 @@
             </div>
           </li>
           <li class="element">
+            <button type="button" class="element__delete-place"></button>
             <img src="./images/dombai.jpg" alt="Домбай (фото)" class="element__img">
             <div class="element__caption">
               <h2 class="element__title">Домбай</h2>
@@ -48,6 +51,7 @@
             </div>
           </li>
           <li class="element">
+            <button type="button" class="element__delete-place"></button>
             <img src="./images/everest.jpg" alt="Гора Эверест (фото)" class="element__img">
             <div class="element__caption">
               <h2 class="element__title">Гора Эверест</h2>
@@ -55,6 +59,7 @@
             </div>
           </li>
           <li class="element">
+            <button type="button" class="element__delete-place"></button>
             <img src="./images/baikal.jpg" alt="Озеро Байкал (фото)" class="element__img">
             <div class="element__caption">
               <h2 class="element__title">Озеро Байкал</h2>
@@ -62,6 +67,7 @@
             </div>
           </li>
           <li class="element">
+            <button type="button" class="element__delete-place"></button>
             <img src="./images/grand-canyon.jpg" alt="Гранд Каньон (фото)" class="element__img">
             <div class="element__caption">
               <h2 class="element__title">Гранд Каньон</h2>
@@ -103,6 +109,16 @@
     </div>
   </div>
 
+  <template id="place-template">
+    <li class="element">
+      <button type="button" class="element__delete-place"></button>
+      <img src="#" alt="" class="element__img">
+      <div class="element__caption">
+        <h2 class="element__title"></h2>
+        <button type="button" class="element__like"></button>
+      </div>
+    </li>
+  </template>
   <script src="./scripts/index.js" defer></script>
 </body>
 </html>

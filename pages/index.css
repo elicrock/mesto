@@ -14,6 +14,7 @@
 @import url('../blocks/elements/elements.css');
 @import url('../blocks/elements/__list/elements__list.css');
 @import url('../blocks/element/element.css');
+@import url('../blocks/element/__delete-place/element__delete-place.css');
 @import url('../blocks/element/__img/element__img.css');
 @import url('../blocks/element/__caption/element__caption.css');
 @import url('../blocks/element/__title/element__title.css');

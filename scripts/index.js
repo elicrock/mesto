@@ -37,24 +37,44 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupTypeEditProfile = document.querySelector('.popup_type_edit-profile');
   const popupTypeAddPlace = document.querySelector('.popup_type_add-place');
   const popupForm = document.querySelector('.popup__form');
-  const popupCloseButton = document.querySelector('.popup__close-button');
   const popupInputName = document.querySelector('.popup__input_el_name');
   const popupInputAbout = document.querySelector('.popup__input_el_about');
+  const elementsList = document.queryCommandIndeterm('.elements__list');
+  const elementLike = document.querySelectorAll('.element__like');
 
   const openForm = function(popup) {
     popup.classList.add('popup_opened');
   };
 
-  const closeForm = function(popup) {
-    popup.classList.remove('popup_opened');
+  const closeForm = function(event) {
+    const target = event.target;
+	  if (target.closest('.popup__close-button') || target === this) {
+		  this.classList.remove('popup_opened');
+	  }
   };
 
   const saveForm = function(event) {
     event.preventDefault();
     profileTitle.textContent = popupInputName.value;
     profileSubtitle.textContent = popupInputAbout.value;
-    closeForm(popup);
-  }
+    popup.classList.remove('popup_opened');
+  };
+
+  const activateLike = function(event) {
+    const target = event.target;
+    target.classList.toggle('element__like_active');
+  };
+
+  const createCard = function(placeValue, urlValue) {
+    const placeTemplate = document.querySelector('#place-template').content;
+    const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
+
+    placeElement.querySelector('.element__title').textContent = placeValue;
+    placeElement.querySelector('.element__img').src = urlValue;
+    placeElement.querySelector('.element__img').alt = placeValue;
+
+    elementsList.append(placeElement);
+  };
 
   profileEditButton.addEventListener('click', () => {
     openForm(popupTypeEditProfile);
@@ -66,10 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
     openForm(popupTypeAddPlace);
   });
 
-  popupForm.addEventListener('submit', saveForm);
+  elementLike.forEach(item => item.addEventListener('click', activateLike));
 
-  popupCloseButton.addEventListener('click', () => {
-    closeForm(popup);
-  });
+  popupForm.addEventListener('submit', saveForm);
+  popupTypeEditProfile.addEventListener('click', closeForm);
+  popupTypeAddPlace.addEventListener('click', closeForm);
 
 });
