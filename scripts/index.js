@@ -1,33 +1,33 @@
 "use strict";
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 document.addEventListener('DOMContentLoaded', () => {
+
+  const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
 
   const profileTitle = document.querySelector('.profile__title');
   const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupInputName = document.querySelector('.popup__input_el_name');
   const popupInputAbout = document.querySelector('.popup__input_el_about');
   const elementsList = document.queryCommandIndeterm('.elements__list');
-  const elementLike = document.querySelectorAll('.element__like');
+  // const elementLike = document.querySelector('.element__like');
 
   const openForm = function(popup) {
     popup.classList.add('popup_opened');
@@ -60,10 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
     popup.classList.remove('popup_opened');
   };
 
-  const activateLike = function(event) {
-    const target = event.target;
-    target.classList.toggle('element__like_active');
-  };
+  // const activateLike = function(event) {
+  //   const target = event.target;
+  //   target.classList.toggle('element__like_active');
+  // };
 
   const createCard = function(placeValue, urlValue) {
     const placeTemplate = document.querySelector('#place-template').content;
@@ -72,9 +72,30 @@ document.addEventListener('DOMContentLoaded', () => {
     placeElement.querySelector('.element__title').textContent = placeValue;
     placeElement.querySelector('.element__img').src = urlValue;
     placeElement.querySelector('.element__img').alt = placeValue;
+    placeElement.querySelector('.element__like').addEventListener('click', event => {
+      const target = event.target;
+      target.classList.toggle('element__like_active');
+    });
 
+    placeElement.querySelector('.element__delete-place').addEventListener('click', () => {
+      const listItem = deleteButton.closest('.element');
+      listItem.remove();
+    });
+
+    // const newCard = elementsList.append(placeElement);
+    // return newCard;
     elementsList.append(placeElement);
   };
+
+  // createCard();
+
+  const initialPlace = () => {
+    initialCards.forEach((elem) => {
+      // createCard(elem.name, elem.link);
+    });
+  };
+  initialPlace();
+
 
   profileEditButton.addEventListener('click', () => {
     openForm(popupTypeEditProfile);
@@ -86,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openForm(popupTypeAddPlace);
   });
 
-  elementLike.forEach(item => item.addEventListener('click', activateLike));
+  // elementLike.forEach(item => item.addEventListener('click', activateLike));
 
   popupForm.addEventListener('submit', saveForm);
   popupTypeEditProfile.addEventListener('click', closeForm);
