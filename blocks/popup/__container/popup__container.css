@@ -12,14 +12,14 @@
 @media screen and (max-width: 1024px) {
   .popup__container {
     /* calc((100vw - Vmin)/(Vmax - Vmin) * (Fmax - Fmin) + Fmin); */
-    max-width: calc((100vw - 320px)/(1024 - 320) * (430 - 282) + 282px);
+    width: calc((100vw - 320px)/(1024 - 320) * (430 - 282) + 282px);
     padding: calc((100vw - 320px)/(1024 - 320) * (36 - 25) + 25px) calc((100vw - 320px)/(1024 - 320) * (36 - 22) + 22px);
   }
 }
 
 @media screen and (max-width: 320px) {
   .popup__container {
-    max-width: 282px;
+    width: 282px;
     padding: 25px 22px;
   }
 }
