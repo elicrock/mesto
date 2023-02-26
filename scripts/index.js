@@ -1,36 +1,7 @@
 "use strict";
 
-document.addEventListener('DOMContentLoaded', () => {
-
-  const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-
   const popups = document.querySelectorAll('.popup');
-  const popupsCloseButton = document.querySelectorAll('.popup__close-button');
+  const closeButtons = document.querySelectorAll('.popup__close-button');
 
   const profileTitle = document.querySelector('.profile__title');
   const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -52,22 +23,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const popupImg = document.querySelector('.popup__img');
   const popupTitleImg = document.querySelector('.popup__title-img');
 
-  const elementsList = document.querySelector('.elements__list');
+  const placeTemplate = document.querySelector('#place-template').content;
+  const elementsContainer = document.querySelector('.elements__list');
 
 
-  const openForm = (popup) => {
+  const openPopup = (popup) => {
     popup.classList.add('popup_opened');
   };
 
-  const closeForm = () => {
+  const closePopup = () => {
     popups.forEach(elem => elem.classList.remove('popup_opened'));
   };
 
-  const saveForm = function(event) {
+  const saveFormPlace = function(event) {
     event.preventDefault();
     profileTitle.textContent = popupInputName.value;
     profileSubtitle.textContent = popupInputAbout.value;
-    closeForm();
+    closePopup();
   };
 
   const handleLikeButtonClick = event => {
@@ -82,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const createCard = card => {
-    const placeTemplate = document.querySelector('#place-template').content;
     const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
 
     placeElement.querySelector('.element__title').textContent = card.name;
@@ -95,13 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
     placeElement.querySelector('.element__img').addEventListener('click', event => {
       const target = event.target;
       if (target.classList.contains('element__img')) {
-        openForm(popupViewImage);
+        openPopup(popupViewImage);
         popupImg.setAttribute('src', card.link);
         popupTitleImg.textContent = card.name;
       }
     });
 
-    elementsList.prepend(placeElement);
+    elementsContainer.prepend(placeElement);
   };
 
   initialCards.forEach(createCard);
@@ -114,32 +85,30 @@ document.addEventListener('DOMContentLoaded', () => {
       link: popupInputUrlPlace.value,
     };
     createCard(card);
-    closeForm();
+    closePopup();
     form.reset();
   };
 
   profileEditButton.addEventListener('click', () => {
-    openForm(popupEditProfile);
+    openPopup(popupEditProfile);
     popupInputName.value = profileTitle.textContent;
     popupInputAbout.value = profileSubtitle.textContent;
   });
 
   profileAddButton.addEventListener('click', () => {
-    openForm(popupAddPlace);
+    openPopup(popupAddPlace);
     popupInputNamePlace.value = '';
     popupInputUrlPlace.value = '';
   });
 
-  popupFormEdit.addEventListener('submit', saveForm);
+  popupFormEdit.addEventListener('submit', saveFormPlace);
   popupFormPlace.addEventListener('submit', addCard);
 
-  popupsCloseButton.forEach((elem) => {
+  closeButtons.forEach((elem) => {
     elem.addEventListener('click', (event) => {
       const target = event.target;
       if (target.closest('.popup__close-button')) {
-        closeForm();
+        closePopup();
       }
     })
   });
-
-});
