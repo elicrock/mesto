@@ -1,5 +1,7 @@
 "use strict";
 
+  const popupList = document.querySelectorAll('.popup');
+
   const profileTitle = document.querySelector('.profile__title');
   const profileSubtitle = document.querySelector('.profile__subtitle');
   const profileEditButton = document.querySelector('.profile__edit-button');
@@ -19,21 +21,37 @@
   const popupImg = popupViewImage.querySelector('.popup__img');
   const popupTitleImg = popupViewImage.querySelector('.popup__title-img');
 
-  const closeButtons = document.querySelectorAll('.popup__close-button');
-
   const placeTemplate = document.querySelector('#place-template').content;
   const elementsContainer = document.querySelector('.elements__list');
 
 
   const openPopup = (popup) => {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closeEsc);
   };
 
   const closePopup = (popup) => {
 	  popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeEsc);
   };
 
-  const saveFormPlace = function(event) {
+  const closeEsc = (event => {
+    if (event.key === 'Escape') {
+      const popupOpened = document.querySelector('.popup_opened');
+      closePopup(popupOpened);
+    }
+  });
+
+  popupList.forEach(popup => {
+    popup.addEventListener('click', event => {
+      if (event.target.classList.contains('popup_opened') ||
+          event.target.classList.contains('popup__close-button')) {
+        closePopup(popup);
+      }
+    });
+  });
+
+  const saveFormPlace = event => {
     event.preventDefault();
     profileTitle.textContent = inputName.value;
     profileSubtitle.textContent = inputAbout.value;
@@ -111,10 +129,3 @@
 
   formEditProfile.addEventListener('submit', saveFormPlace);
   formAddPlace.addEventListener('submit', addCard);
-
-  closeButtons.forEach(elem => {
-    const popup = elem.closest('.popup');
-    elem.addEventListener('click', () => {
-      closePopup(popup);
-    });
-  });
