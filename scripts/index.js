@@ -1,6 +1,6 @@
 "use strict";
 
-  const popupList = document.querySelectorAll('.popup');
+  const popupList = Array.from(document.querySelectorAll('.popup'));
 
   const profileTitle = document.querySelector('.profile__title');
   const profileSubtitle = document.querySelector('.profile__subtitle');
