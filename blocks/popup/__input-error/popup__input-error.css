@@ -4,9 +4,8 @@
   font-size: 12px;
   line-height: 15px;
   font-weight: 400;
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
+  display: flex;
+  min-height: 30px;
   opacity: 0;
   transition: opacity 0.2s;
 }

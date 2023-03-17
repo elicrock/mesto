@@ -16,6 +16,10 @@
   const formAddPlace = document.forms.addPlace;
   const inputNamePlace = formAddPlace.querySelector('.popup__input_el_name-place');
   const inputUrlPlace = formAddPlace.querySelector('.popup__input_el_url-place');
+  const buttonElement = formAddPlace.querySelector(`${validationConfig.submitButtonSelector}`);
+
+  const inputList = Array.from(document.querySelectorAll(`${validationConfig.inputSelector}`));
+  const errorsList = Array.from(document.querySelectorAll('.popup__input-error'));
 
   const popupViewImage = document.querySelector('.popup_type_view-image');
   const popupImg = popupViewImage.querySelector('.popup__img');
@@ -25,6 +29,15 @@
   const elementsContainer = document.querySelector('.elements__list');
 
 
+  const cleanErrors = () => {
+    inputList.forEach(input => {
+      input.classList.remove('popup__input_type_error');
+    });
+    errorsList.forEach(error => {
+      error.textContent = '';
+    });
+  };
+
   const openPopup = (popup) => {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closeEsc);
@@ -33,6 +46,7 @@
   const closePopup = (popup) => {
 	  popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeEsc);
+    cleanErrors();
   };
 
   const closeEsc = (event => {
@@ -110,8 +124,9 @@
       link: inputUrlPlace.value,
     };
     elementsContainer.prepend(createCard(card));
-    closePopup(popupAddPlace);
     form.reset();
+    toggleButtonValidity(inputList, buttonElement, validationConfig.inactiveButtonClass);
+    closePopup(popupAddPlace);
   };
 
   profileEditButton.addEventListener('click', () => {
@@ -121,10 +136,9 @@
   });
 
   profileAddButton.addEventListener('click', () => {
-    // inputNamePlace.value = '';
-    // inputUrlPlace.value = '';
     openPopup(popupAddPlace);
     formAddPlace.reset();
+    toggleButtonValidity(inputList, buttonElement, validationConfig.inactiveButtonClass);
   });
 
   formEditProfile.addEventListener('submit', saveFormPlace);

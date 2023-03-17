@@ -5,23 +5,21 @@
   display: flex;
   -webkit-flex-direction: column;
           flex-direction: column;
-  gap: 35px;
   border: none;
   padding-top: 54px;
-  padding-bottom: 48px;
+  padding-bottom: 18px;
 }
 
 @media screen and (max-width: 1024px) {
   .popup__inputs {
     padding-top: calc((100vw - 320px)/(1024 - 320) * (54 - 70) + 70px);
-    padding-bottom: calc((100vw - 320px)/(1024 - 320) * (48 - 45) + 45px);
+    padding-bottom: calc((100vw - 320px)/(1024 - 320) * (18 - 15) + 15px);
   }
 }
 
 @media screen and (max-width: 320px) {
   .popup__inputs {
     padding-top: 70px;
-    padding-bottom: 45px;
-    gap: 25px;
+    padding-bottom: 15px;
   }
 }

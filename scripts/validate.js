@@ -19,7 +19,7 @@ const checkInputValidity = (formElement, inputElement, inputErrorClass, errorCla
   }
 };
 
-const setEventListeners = (formElement, inputSelector, inputErrorClass, errorClass, submitButtonSelector, inactiveButtonClass) => {
+const setEventListeners = (formElement, { inputSelector, inputErrorClass, errorClass, submitButtonSelector, inactiveButtonClass }) => {
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
   const buttonElement = formElement.querySelector(submitButtonSelector);
 
@@ -49,22 +49,24 @@ const toggleButtonValidity = (inputList, buttonElement, inactiveButtonClass) => 
   }
 };
 
-const enableValidation = (config) => {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
+const enableValidation = ({ formSelector, ...config }) => {
+  const formList = Array.from(document.querySelectorAll(formSelector));
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (event) => {
       event.preventDefault();
     });
-    setEventListeners(formElement, config.inputSelector, config.inputErrorClass, config.errorClass, config.submitButtonSelector, config.inactiveButtonClass);
+    setEventListeners(formElement, config);
   });
 };
 
-enableValidation({
+const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_disabled',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_active'
-});
+  errorClass: 'popup__input-error_active',
+}
+
+enableValidation(validationConfig);
