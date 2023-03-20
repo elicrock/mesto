@@ -53,9 +53,6 @@ const enableValidation = ({ formSelector, ...config }) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
 
   formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (event) => {
-      event.preventDefault();
-    });
     setEventListeners(formElement, config);
   });
 };

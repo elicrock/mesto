@@ -26,8 +26,8 @@
   const popupTitleImg = popupViewImage.querySelector('.popup__title-img');
 
   const placeTemplate = document.querySelector('#place-template').content;
-  const elementsContainer = document.querySelector('.elements__list');
-
+  const placeElement = placeTemplate.querySelector('.element');
+  const placesContainer = document.querySelector('.elements__list');
 
   const cleanErrors = () => {
     inputList.forEach(input => {
@@ -46,7 +46,6 @@
   const closePopup = (popup) => {
 	  popup.classList.remove('popup_opened');
     document.removeEventListener('keydown', closeEsc);
-    cleanErrors();
   };
 
   const closeEsc = (event => {
@@ -88,32 +87,32 @@
     openPopup(popupViewImage);
     const cardTitle = target.closest('.element').querySelector('.element__title').textContent;
 
-    popupImg.setAttribute('src', target.src);
-    popupImg.setAttribute('alt', target.alt);
+    popupImg.src = target.src;
+    popupImg.alt = target.alt;
     popupTitleImg.textContent = cardTitle;
     // popupTitleImg.textContent = target.alt.split(' (фото)')[0];
   };
 
   const createCard = card => {
-    const placeElement = placeTemplate.querySelector('.element').cloneNode(true);
-    const cardTitle = placeElement.querySelector('.element__title');
-    const cardImage = placeElement.querySelector('.element__img');
-    const cardLike = placeElement.querySelector('.element__like');
-    const cardDelete = placeElement.querySelector('.element__delete-place');
+    const clonedElement = placeElement.cloneNode(true);
+    const cardTitle = clonedElement.querySelector('.element__title');
+    const cardImage = clonedElement.querySelector('.element__img');
+    const cardLike = clonedElement.querySelector('.element__like');
+    const cardDelete = clonedElement.querySelector('.element__delete-place');
 
     cardTitle.textContent = card.name;
-    cardImage.setAttribute('src', card.link);
-    cardImage.setAttribute('alt', `${card.name} (фото)`);
+    cardImage.src = card.link;
+    cardImage.alt = `${card.name} (фото)`;
 
     cardLike.addEventListener('click', handleLikeButtonClick);
     cardDelete.addEventListener('click', handleDeleteButtonClick);
     cardImage.addEventListener('click', handleImgClick);
 
-    return placeElement;
+    return clonedElement;
   };
 
   initialCards.forEach((card) => {
-    elementsContainer.append(createCard(card));
+    placesContainer.append(createCard(card));
   });
 
   const addCard = event => {
@@ -123,7 +122,7 @@
       name: inputNamePlace.value,
       link: inputUrlPlace.value,
     };
-    elementsContainer.prepend(createCard(card));
+    placesContainer.prepend(createCard(card));
     form.reset();
     toggleButtonValidity(inputList, buttonElement, validationConfig.inactiveButtonClass);
     closePopup(popupAddPlace);
