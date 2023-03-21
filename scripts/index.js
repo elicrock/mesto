@@ -118,14 +118,14 @@ const handleAddNewCard = event => {
   closePopup(popupAddPlace);
 };
 
-const changeProfileInfo = () => {
+const openProfilePopup = () => {
   openPopup(popupEditProfile);
   inputName.value = profileTitle.textContent;
   inputAbout.value = profileSubtitle.textContent;
   cleanInputErrors(formEditProfile);
 };
 
-const addNewPlace = () => {
+const openAddPlacePopup = () => {
   openPopup(popupAddPlace);
   formAddPlace.reset();
   toggleButtonValidity(inputList, buttonElement, validationConfig.inactiveButtonClass);
@@ -141,8 +141,8 @@ popupList.forEach(popup => {
   });
 });
 
-profileEditButton.addEventListener('click', changeProfileInfo);
-profileAddButton.addEventListener('click', addNewPlace);
+profileEditButton.addEventListener('click', openProfilePopup);
+profileAddButton.addEventListener('click', openAddPlacePopup);
 
 formEditProfile.addEventListener('submit', handleSaveFormProfile);
 formAddPlace.addEventListener('submit', handleAddNewCard);
