@@ -1,11 +1,9 @@
-import { popupViewImage, popupImg, popupTitleImg } from './Constants.js'
-import { openPopup } from './index.js';
-
 export default class Card {
-  constructor(data, teamplateSelector) {
+  constructor(data, teamplateSelector, handleCardClick) {
     this._titleImg = data.name;
     this._urlImg = data.link;
     this._teamplateSelector = teamplateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -26,34 +24,32 @@ export default class Card {
     event.target.closest('.element').remove();
   };
 
-  _handleOpenImg() {
-    popupImg.src = this._urlImg;
-    popupImg.alt = `${this._titleImg} (фото)`;
-    popupTitleImg.textContent = this._titleImg;
-    openPopup(popupViewImage);
-  };
-
   _setEventListeners() {
-    this._element.querySelector('.element__like').addEventListener('click', (event) => {
+    this._likeButton = this._element.querySelector('.element__like');
+    this._deleteButton = this._element.querySelector('.element__delete-place');
+
+    this._likeButton.addEventListener('click', (event) => {
       this._handleLikeButtonClick(event);
     });
 
-    this._element.querySelector('.element__delete-place').addEventListener('click', (event) => {
+    this._deleteButton.addEventListener('click', (event) => {
       this._handleDeleteButtonClick(event);
     });
 
-    this._element.querySelector('.element__img').addEventListener('click', () => {
-      this._handleOpenImg();
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick(this._titleImg, this._urlImg);
     });
   }
 
   generateCard() {
     this._element = this._getTemplate();
+    this._cardTitle = this._element.querySelector('.element__title');
+    this._cardImage = this._element.querySelector('.element__img');
     this._setEventListeners();
 
-    this._element.querySelector('.element__title').textContent = this._titleImg;
-    this._element.querySelector('.element__img').src = this._urlImg;
-    this._element.querySelector('.element__img').alt = `${this._titleImg} (фото)`;
+    this._cardTitle.textContent = this._titleImg;
+    this._cardImage.src = this._urlImg;
+    this._cardImage.alt = `${this._titleImg} (фото)`;
 
     return this._element;
   }
