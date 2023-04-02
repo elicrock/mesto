@@ -75,7 +75,7 @@ const openProfilePopup = () => {
 const openAddPlacePopup = () => {
   openPopup(popupAddPlace);
   formAddPlace.reset();
-  validatorAddPlaceForm.toggleButtonValidity();
+  validateAddPlaceForm.toggleButtonValidity();
   cleanInputErrors(formAddPlace);
 };
 
