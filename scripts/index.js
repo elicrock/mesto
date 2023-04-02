@@ -60,7 +60,7 @@ const handleAddNewCard = event => {
   placesContainer.prepend(createCard(card));
   form.reset();
   closePopup(popupAddPlace);
-  validatorAddPlaceForm.toggleButtonValidity();
+  validateAddPlaceForm.toggleButtonValidity();
 };
 
 const openProfilePopup = () => {
