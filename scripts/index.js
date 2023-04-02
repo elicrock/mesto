@@ -4,10 +4,10 @@ import Card from './Card.js';
 import FormValidator from './FormValidator.js';
 import initialCards from './Data.js';
 
-const validatorProfileForm = new FormValidator(validationConfig, formEditProfile);
-const validatorAddPlaceForm = new FormValidator(validationConfig, formAddPlace);
-validatorProfileForm.enableValidation();
-validatorAddPlaceForm.enableValidation();
+const validateProfileForm = new FormValidator(validationConfig, formEditProfile);
+const validateAddPlaceForm = new FormValidator(validationConfig, formAddPlace);
+validateProfileForm.enableValidation();
+validateAddPlaceForm.enableValidation();
 
 const cleanInputErrors = (form) => {
   const inputList = Array.from(form.querySelectorAll(validationConfig.inputSelector));
