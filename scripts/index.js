@@ -67,7 +67,6 @@ const handleAddNewCard = event => {
   placesContainer.prepend(createCard(card));
   form.reset();
   closePopup(popupAddPlace);
-  formValidators['addPlace'].resetValidation();
 };
 
 const openProfilePopup = () => {
