@@ -70,16 +70,16 @@ const handleAddNewCard = event => {
 };
 
 const openProfilePopup = () => {
-  openPopup(popupEditProfile);
   inputName.value = profileTitle.textContent;
   inputAbout.value = profileSubtitle.textContent;
   formValidators['profileEdit'].resetValidation();
+  openPopup(popupEditProfile);
 };
 
 const openAddPlacePopup = () => {
-  openPopup(popupAddPlace);
   formAddPlace.reset();
   formValidators['addPlace'].resetValidation();
+  openPopup(popupAddPlace);
 };
 
 popupList.forEach(popup => {
