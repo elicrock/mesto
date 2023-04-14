@@ -1,9 +1,7 @@
-import { popupList, profileTitle, profileSubtitle, profileEditButton, profileAddButton, popupEditProfile, formEditProfile, inputName, inputAbout, popupAddPlace, formAddPlace, inputNamePlace, inputUrlPlace, placesContainer, popupViewImage, popupImg, popupTitleImg, validationConfig } from './Constants.js'
+import { initialCards, popupList, profileTitle, profileSubtitle, profileEditButton, profileAddButton, popupEditProfile, formEditProfile, inputName, inputAbout, popupAddPlace, formAddPlace, inputNamePlace, inputUrlPlace, placesContainer, popupViewImage, popupImg, popupTitleImg, validationConfig } from '../utils/constants.js'
 
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
-import initialCards from './Data.js';
-
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
 
 const formValidators = {};
 
