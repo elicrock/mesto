@@ -1,6 +1,7 @@
 import { initialCards, popupList, profileTitle, profileSubtitle, profileEditButton, profileAddButton, popupEditProfile, formEditProfile, inputName, inputAbout, popupAddPlace, formAddPlace, inputNamePlace, inputUrlPlace, placesContainer, popupViewImage, popupImg, popupTitleImg, validationConfig } from '../utils/constants.js'
 
 import Card from '../components/Card.js';
+import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js';
 
 const formValidators = {};
