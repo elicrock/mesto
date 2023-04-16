@@ -1,8 +1,12 @@
-import { initialCards, popupList, profileTitle, profileSubtitle, profileEditButton, profileAddButton, popupEditProfile, formEditProfile, inputName, inputAbout, popupAddPlace, formAddPlace, inputNamePlace, inputUrlPlace, placesContainer, popupViewImage, popupImg, popupTitleImg, validationConfig } from '../utils/constants.js'
+import './index.css';
+
+import { initialCards, profileTitle, profileSubtitle, profileEditButton, profileAddButton, popupEditProfile, formEditProfile, inputName, inputAbout, popupAddPlace, formAddPlace, inputNamePlace, inputUrlPlace, placesContainer, popupViewImage, validationConfig } from '../utils/constants.js'
 
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js';
+import PopupWithImage from '../components/PopupWithImage';
+import PopupWithForm from '../components/PopupWithForm';
 
 const formValidators = {};
 
@@ -18,43 +22,55 @@ const enableValidation = (config) => {
 
 enableValidation(validationConfig);
 
-const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handleClosePopupByEsc);
-};
+// const openPopup = (popup) => {
+//   popup.classList.add('popup_opened');
+//   document.addEventListener('keydown', handleClosePopupByEsc);
+// };
 
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleClosePopupByEsc);
-};
+// const closePopup = (popup) => {
+//   popup.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', handleClosePopupByEsc);
+// };
 
-const handleClosePopupByEsc = event => {
-  if (event.key === 'Escape') {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
-  }
-};
+// const handleClosePopupByEsc = event => {
+//   if (event.key === 'Escape') {
+//     const popupOpened = document.querySelector('.popup_opened');
+//     closePopup(popupOpened);
+//   }
+// };
+
+const popupProfile = new PopupWithForm(popupEditProfile, handleSaveFormProfile);
+popupProfile.setEventListeners();
+
+const popupImg = new PopupWithImage(popupViewImage);
+popupImg.setEventListeners();
 
 const handleCardClick = (name, link) => {
-  popupImg.src = link;
-  popupImg.alt = `${name} (фото)`;
-  popupTitleImg.textContent = name;
-  openPopup(popupViewImage);
+  popupImg.open(name, link);
 };
 
 const handleSaveFormProfile = event => {
-  event.preventDefault();
-  profileTitle.textContent = inputName.value;
-  profileSubtitle.textContent = inputAbout.value;
-  closePopup(popupEditProfile);
+  console.log('submit');
+  // event.preventDefault();
+  // profileTitle.textContent = inputName.value;
+  // profileSubtitle.textContent = inputAbout.value;
+  // closePopup(popupEditProfile);
 };
 
 const createCard = (item) => {
   const card = new Card(item, '#place-template', handleCardClick);
-  return card.generateCard();
+  const cardElement = card.generateCard();
+  return cardElement;
 };
 
-initialCards.forEach(card => placesContainer.append(createCard(card)));
+const cards = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    cards.addInitialItem(createCard(item));
+  }
+}, placesContainer);
+
+cards.renderItems();
 
 const handleAddNewCard = event => {
   event.preventDefault();
@@ -63,16 +79,18 @@ const handleAddNewCard = event => {
     name: inputNamePlace.value,
     link: inputUrlPlace.value,
   };
-  placesContainer.prepend(createCard(card));
+  cards.addItem(createCard(card));
   form.reset();
   closePopup(popupAddPlace);
 };
 
 const openProfilePopup = () => {
-  inputName.value = profileTitle.textContent;
-  inputAbout.value = profileSubtitle.textContent;
-  formValidators['profileEdit'].resetValidation();
-  openPopup(popupEditProfile);
+  console.log('asfas');
+  popupProfile.open();
+  // inputName.value = profileTitle.textContent;
+  // inputAbout.value = profileSubtitle.textContent;
+  // formValidators['profileEdit'].resetValidation();
+  // openPopup(popupEditProfile);
 };
 
 const openAddPlacePopup = () => {
@@ -81,14 +99,6 @@ const openAddPlacePopup = () => {
   openPopup(popupAddPlace);
 };
 
-popupList.forEach(popup => {
-  popup.addEventListener('click', event => {
-    if (event.target.classList.contains('popup_opened') ||
-        event.target.classList.contains('popup__close-button')) {
-      closePopup(popup);
-    }
-  });
-});
 
 profileEditButton.addEventListener('click', openProfilePopup);
 profileAddButton.addEventListener('click', openAddPlacePopup);
