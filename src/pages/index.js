@@ -1,12 +1,13 @@
 import './index.css';
 
-import { initialCards, profileTitle, profileSubtitle, profileEditButton, profileAddButton, popupEditProfile, formEditProfile, inputName, inputAbout, popupAddPlace, formAddPlace, inputNamePlace, inputUrlPlace, placesContainer, popupViewImage, validationConfig } from '../utils/constants.js'
+import { initialCards, profileTitleSelector, profileSubtitleSelector, profileEditButton, profileAddButton, popupEditProfile, formEditProfile, inputName, inputAbout, popupAddPlace, formAddPlace, inputNamePlace, inputUrlPlace, placesContainer, popupViewImage, validationConfig } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import FormValidator from '../components/FormValidator.js';
-import PopupWithImage from '../components/PopupWithImage';
-import PopupWithForm from '../components/PopupWithForm';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 
 const formValidators = {};
 
@@ -22,39 +23,36 @@ const enableValidation = (config) => {
 
 enableValidation(validationConfig);
 
-// const openPopup = (popup) => {
-//   popup.classList.add('popup_opened');
-//   document.addEventListener('keydown', handleClosePopupByEsc);
-// };
+const userInfo = new UserInfo({ profileTitleSelector, profileSubtitleSelector });
 
-// const closePopup = (popup) => {
-//   popup.classList.remove('popup_opened');
-//   document.removeEventListener('keydown', handleClosePopupByEsc);
-// };
+const handleSaveFormProfile = ({ 'user-name': inputName, 'about': inputAbout}) => {
+  userInfo.setUserInfo(inputName, inputAbout);
+  popupProfile.close();
+};
 
-// const handleClosePopupByEsc = event => {
-//   if (event.key === 'Escape') {
-//     const popupOpened = document.querySelector('.popup_opened');
-//     closePopup(popupOpened);
-//   }
+// const handleAddNewCard = (event, { 'place-name': inputNamePlace, 'link': inputUrlPlace }) => {
+//   event.preventDefault();
+  // const form = event.target;
+  // const card = {
+  //   name: inputNamePlace.value,
+  //   link: inputUrlPlace.value,
+  // };
+  // cards.addItem(createCard(card));
+  // form.reset();
+  // closePopup(popupAddPlace);
 // };
 
 const popupProfile = new PopupWithForm(popupEditProfile, handleSaveFormProfile);
 popupProfile.setEventListeners();
+
+// const popupAddNewPlace = new PopupWithForm(popupAddPlace, handleAddNewCard);
+// popupAddNewPlace.setEventListeners();
 
 const popupImg = new PopupWithImage(popupViewImage);
 popupImg.setEventListeners();
 
 const handleCardClick = (name, link) => {
   popupImg.open(name, link);
-};
-
-const handleSaveFormProfile = event => {
-  console.log('submit');
-  // event.preventDefault();
-  // profileTitle.textContent = inputName.value;
-  // profileSubtitle.textContent = inputAbout.value;
-  // closePopup(popupEditProfile);
 };
 
 const createCard = (item) => {
@@ -66,42 +64,28 @@ const createCard = (item) => {
 const cards = new Section({
   items: initialCards,
   renderer: (item) => {
-    cards.addInitialItem(createCard(item));
+    cards.addItem(createCard(item));
   }
 }, placesContainer);
 
 cards.renderItems();
 
-const handleAddNewCard = event => {
-  event.preventDefault();
-  const form = event.target;
-  const card = {
-    name: inputNamePlace.value,
-    link: inputUrlPlace.value,
-  };
-  cards.addItem(createCard(card));
-  form.reset();
-  closePopup(popupAddPlace);
-};
-
 const openProfilePopup = () => {
-  console.log('asfas');
+  const { userName, userAbout } = userInfo.getUserInfo();
+  inputName.value = userName;
+  inputAbout.value = userAbout;
+  formValidators['profileEdit'].resetValidation();
   popupProfile.open();
-  // inputName.value = profileTitle.textContent;
-  // inputAbout.value = profileSubtitle.textContent;
-  // formValidators['profileEdit'].resetValidation();
-  // openPopup(popupEditProfile);
 };
 
 const openAddPlacePopup = () => {
   formAddPlace.reset();
   formValidators['addPlace'].resetValidation();
-  openPopup(popupAddPlace);
+  // popupAddNewPlace.open();
 };
-
 
 profileEditButton.addEventListener('click', openProfilePopup);
 profileAddButton.addEventListener('click', openAddPlacePopup);
 
-formEditProfile.addEventListener('submit', handleSaveFormProfile);
-formAddPlace.addEventListener('submit', handleAddNewCard);
+// formEditProfile.addEventListener('submit', handleSaveFormProfile);
+// formAddPlace.addEventListener('submit', handleAddNewCard);
