@@ -1,6 +1,6 @@
 import './index.css';
 
-import { initialCards, profileTitleSelector, profileSubtitleSelector, profileEditButton, profileAddButton, popupEditProfile, formEditProfile, inputName, inputAbout, popupAddPlace, formAddPlace, inputNamePlace, inputUrlPlace, placesContainer, popupViewImage, validationConfig } from '../utils/constants.js';
+import { initialCards, profileTitleSelector, profileSubtitleSelector, profileEditButton, profileAddButton, popupEditProfile, inputName, inputAbout, popupAddPlace, placesContainer, popupViewImage, validationConfig } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
@@ -21,8 +21,6 @@ const enableValidation = (config) => {
   });
 };
 
-enableValidation(validationConfig);
-
 const userInfo = new UserInfo({ profileTitleSelector, profileSubtitleSelector });
 
 const handleSaveFormProfile = ({ 'user-name': inputName, 'about': inputAbout}) => {
@@ -30,23 +28,20 @@ const handleSaveFormProfile = ({ 'user-name': inputName, 'about': inputAbout}) =
   popupProfile.close();
 };
 
-// const handleAddNewCard = (event, { 'place-name': inputNamePlace, 'link': inputUrlPlace }) => {
-//   event.preventDefault();
-  // const form = event.target;
-  // const card = {
-  //   name: inputNamePlace.value,
-  //   link: inputUrlPlace.value,
-  // };
-  // cards.addItem(createCard(card));
-  // form.reset();
-  // closePopup(popupAddPlace);
-// };
+const handleAddNewCard = ({ 'place-name': namePlace, 'link': urlPlace }) => {
+  const card = {
+    name: namePlace,
+    link: urlPlace,
+  };
+  cards.addItem(createCard(card));
+  popupAddNewPlace.close();
+};
 
 const popupProfile = new PopupWithForm(popupEditProfile, handleSaveFormProfile);
 popupProfile.setEventListeners();
 
-// const popupAddNewPlace = new PopupWithForm(popupAddPlace, handleAddNewCard);
-// popupAddNewPlace.setEventListeners();
+const popupAddNewPlace = new PopupWithForm(popupAddPlace, handleAddNewCard);
+popupAddNewPlace.setEventListeners();
 
 const popupImg = new PopupWithImage(popupViewImage);
 popupImg.setEventListeners();
@@ -79,13 +74,11 @@ const openProfilePopup = () => {
 };
 
 const openAddPlacePopup = () => {
-  formAddPlace.reset();
   formValidators['addPlace'].resetValidation();
-  // popupAddNewPlace.open();
+  popupAddNewPlace.open();
 };
+
+enableValidation(validationConfig);
 
 profileEditButton.addEventListener('click', openProfilePopup);
 profileAddButton.addEventListener('click', openAddPlacePopup);
-
-// formEditProfile.addEventListener('submit', handleSaveFormProfile);
-// formAddPlace.addEventListener('submit', handleAddNewCard);

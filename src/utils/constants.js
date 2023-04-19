@@ -36,9 +36,6 @@ export const inputName = formEditProfile.querySelector('.popup__input_el_name');
 export const inputAbout = formEditProfile.querySelector('.popup__input_el_about');
 
 export const popupAddPlace = '.popup_type_add-place';
-export const formAddPlace = document.forms.addPlace;
-export const inputNamePlace = formAddPlace.querySelector('.popup__input_el_name-place');
-export const inputUrlPlace = formAddPlace.querySelector('.popup__input_el_url-place');
 
 export const placesContainer = '.elements__list';
 export const popupViewImage = '.popup_type_view-image';
