@@ -1,6 +1,6 @@
 import './index.css';
 
-import { initialCards, profileTitleSelector, profileSubtitleSelector, profileEditButton, profileAddButton, popupEditProfile, inputName, inputAbout, popupAddPlace, placesContainer, popupViewImage, validationConfig } from '../utils/constants.js';
+import { initialCards, profileTitleSelector, profileSubtitleSelector, profileEditButton, profileAddButton, popupEditProfile, popupAddPlace, popupViewImage, placesContainer, validationConfig } from '../utils/constants.js';
 
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
@@ -23,16 +23,13 @@ const enableValidation = (config) => {
 
 const userInfo = new UserInfo({ profileTitleSelector, profileSubtitleSelector });
 
-const handleSaveFormProfile = ({ 'user-name': inputName, 'about': inputAbout}) => {
-  userInfo.setUserInfo(inputName, inputAbout);
+const handleSaveFormProfile = ({ 'user-name': userName, 'about': userAbout}) => {
+  userInfo.setUserInfo(userName, userAbout);
   popupProfile.close();
 };
 
 const handleAddNewCard = ({ 'place-name': namePlace, 'link': urlPlace }) => {
-  const card = {
-    name: namePlace,
-    link: urlPlace,
-  };
+  const card = { name: namePlace, link: urlPlace };
   cards.addItem(createCard(card));
   popupAddNewPlace.close();
 };
@@ -67,8 +64,7 @@ cards.renderItems();
 
 const openProfilePopup = () => {
   const { userName, userAbout } = userInfo.getUserInfo();
-  inputName.value = userName;
-  inputAbout.value = userAbout;
+  popupProfile.setInputValues({ 'user-name': userName, 'about': userAbout });
   formValidators['profileEdit'].resetValidation();
   popupProfile.open();
 };
