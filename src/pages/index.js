@@ -23,7 +23,7 @@ const enableValidation = (config) => {
 
 const userInfo = new UserInfo({ profileTitleSelector, profileSubtitleSelector });
 
-const handleSaveFormProfile = ({ 'user-name': userName, 'about': userAbout}) => {
+const handleSaveFormProfile = ({ 'user-name': userName, 'about': userAbout }) => {
   userInfo.setUserInfo(userName, userAbout);
   popupProfile.close();
 };
