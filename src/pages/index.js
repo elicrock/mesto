@@ -109,7 +109,6 @@ const handleDeleteButtonClick = (cardId, cardElement) => {
   });
 };
 
-
 const handleCardClick = (name, link) => {
   popupImg.open(name, link);
 };
