@@ -33,11 +33,13 @@ export const profileSubtitleSelector = '.profile__subtitle';
 export const profileAvatarSelector = '.profile__avatar';
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profileAddButton = document.querySelector('.profile__add-button');
+export const profileEditAvatarButton = document.querySelector('.profile__avatar-button');
 
 export const popupEditProfile = '.popup_type_edit-profile';
 export const popupAddPlace = '.popup_type_add-place';
 export const popupViewImage = '.popup_type_view-image';
 export const popupConfirmation = '.popup_type_confirmation';
+export const popupEditAvatar = '.popup_type_edit-avatar';
 
 export const placesContainer = '.elements__list';
 

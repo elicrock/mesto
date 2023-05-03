@@ -1,6 +1,6 @@
 import './index.css';
 
-import { token, cohortId, profileTitleSelector, profileSubtitleSelector, profileAvatarSelector, profileEditButton, profileAddButton, popupEditProfile, popupAddPlace, popupViewImage, popupConfirmation, placesContainer, validationConfig } from '../utils/constants.js';
+import { token, cohortId, profileTitleSelector, profileSubtitleSelector, profileAvatarSelector, profileEditButton, profileAddButton, profileEditAvatarButton, popupEditProfile, popupAddPlace, popupViewImage, popupConfirmation, popupEditAvatar, placesContainer, validationConfig } from '../utils/constants.js';
 
 import Api from '../components/Api.js'
 import Card from '../components/Card.js';
@@ -41,7 +41,7 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     userInfo.setUserInfo(userData.name, userData.about);
     userInfo.setUserAvatar(userData.avatar);
     userId = userData._id;
-    // console.log(cardsData);
+    // console.log(userData);
     cardsSection.renderItems(cardsData);
   })
 
@@ -68,6 +68,21 @@ const handleSaveFormProfile = ({ 'user-name': userName, 'about': userAbout }) =>
 //     })
 //   });
 
+const handleEditAvatar = ({ avatar }) => {
+  popupUpdateAvatar.renderLoading(true);
+  api.updateUserAvatar(avatar)
+    .then(res => {
+      userInfo.setUserAvatar(res.avatar);
+      popupUpdateAvatar.close();
+    })
+    .catch(err => {
+      console.error(err);
+    })
+    .finally(() => {
+      popupUpdateAvatar.renderLoading(false);
+    });
+};
+
 const handleAddNewCard = ({ 'place-name': namePlace, 'link': urlPlace }) => {
   popupAddNewPlace.renderLoading(true);
   api.addNewCard(namePlace, urlPlace)
@@ -88,6 +103,9 @@ popupProfile.setEventListeners();
 
 const popupAddNewPlace = new PopupWithForm(popupAddPlace, handleAddNewCard);
 popupAddNewPlace.setEventListeners();
+
+const popupUpdateAvatar = new PopupWithForm(popupEditAvatar, handleEditAvatar);
+popupUpdateAvatar.setEventListeners();
 
 const popupImg = new PopupWithImage(popupViewImage);
 popupImg.setEventListeners();
@@ -137,7 +155,13 @@ const openAddPlacePopup = () => {
   popupAddNewPlace.open();
 };
 
+const openEditAvatarPopup = () => {
+  formValidators['editAvatar'].resetValidation();
+  popupUpdateAvatar.open();
+};
+
 enableValidation(validationConfig);
 
 profileEditButton.addEventListener('click', openProfilePopup);
 profileAddButton.addEventListener('click', openAddPlacePopup);
+profileEditAvatarButton.addEventListener('click', openEditAvatarPopup);
