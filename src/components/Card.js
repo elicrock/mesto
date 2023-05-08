@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(data, userId, teamplateSelector, handleCardClick, handleDeleteButtonClick) {
+  constructor(data, userId, teamplateSelector, handleCardClick, handleDeleteButtonClick, handleLikeButtonClick) {
     this._titleImg = data.name;
     this._urlImg = data.link;
     this._cardId = data._id;
@@ -9,6 +9,7 @@ export default class Card {
     this._teamplateSelector = teamplateSelector;
     this._handleCardClick = handleCardClick;
     this._handleDeleteButtonClick = handleDeleteButtonClick;
+    this._handleLikeButtonClick = handleLikeButtonClick;
   }
 
   _getTemplate() {
@@ -25,23 +26,26 @@ export default class Card {
     return this._ownerId === this._userId;
   }
 
-  _handleLikeButtonClick(event) {
-    event.target.classList.toggle('element__like-btn_active');
-  };
+  _isUserLike() {
+    return this._likes.some(item => item._id === this._userId);
+  }
 
-  // removeElement() {
-  //   this._element.remove();
-  //   this._element = null;
-  // };
+  updateLikes(likes) {
+    this._likes = likes;
+    this._cardLikes.textContent = likes.length;
+    this._likeButton.classList.toggle('element__like-btn_active');
+  }
 
   _setEventListeners() {
-    this._likeButton.addEventListener('click', (event) => {
-      this._handleLikeButtonClick(event);
+    this._likeButton.addEventListener('click', () => {
+      this._handleLikeButtonClick(this, this._cardId, this._isUserLike());
     });
 
-    this._deleteButton.addEventListener('click', () => {
-      this._handleDeleteButtonClick(this._cardId, this._element);
-    });
+    if (this._isUserCard()) {
+      this._deleteButton.addEventListener('click', () => {
+        this._handleDeleteButtonClick(this._cardId, this._element);
+      });
+    }
 
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._titleImg, this._urlImg);
@@ -64,6 +68,10 @@ export default class Card {
 
     if (!this._isUserCard()) {
       this._deleteButton.classList.add('element__delete-btn_disabled');
+    }
+
+    if (this._isUserLike()) {
+      this._likeButton.classList.add('element__like-btn_active');
     }
 
     return this._element;

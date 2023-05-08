@@ -41,7 +41,6 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     userInfo.setUserInfo(userData.name, userData.about);
     userInfo.setUserAvatar(userData.avatar);
     userId = userData._id;
-    // console.log(userData);
     cardsSection.renderItems(cardsData);
   })
 
@@ -59,14 +58,6 @@ const handleSaveFormProfile = ({ 'user-name': userName, 'about': userAbout }) =>
       popupProfile.renderLoading(false);
     });
 };
-
-// api.getInitialCards()
-//   .then(cards => {
-//     // console.log(cards);
-//     cards.forEach(card => {
-//       console.log(card.owner._id);
-//     })
-//   });
 
 const handleEditAvatar = ({ avatar }) => {
   popupUpdateAvatar.renderLoading(true);
@@ -127,12 +118,32 @@ const handleDeleteButtonClick = (cardId, cardElement) => {
   });
 };
 
+const handleLikeButtonClick = (card, cardId, isLiked) => {
+  if (!isLiked) {
+    api.addLike(cardId)
+      .then((data) => {
+        card.updateLikes(data.likes);
+      })
+      .catch(err => {
+        console.error(`Не получается поставить like. ${err}`);
+      })
+  } else {
+    api.deleteLike(cardId)
+      .then((data) => {
+        card.updateLikes(data.likes);
+      })
+      .catch(err => {
+        console.error(`Не получается убрать like. ${err}`);
+      })
+  }
+};
+
 const handleCardClick = (name, link) => {
   popupImg.open(name, link);
 };
 
 const createCard = (item) => {
-  const card = new Card(item, userId, '#place-template', handleCardClick, handleDeleteButtonClick);
+  const card = new Card(item, userId, '#place-template', handleCardClick, handleDeleteButtonClick, handleLikeButtonClick);
   const cardElement = card.generateCard();
   return cardElement;
 };
