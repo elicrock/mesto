@@ -16,6 +16,7 @@ export default class Api {
       headers: this._headers,
     })
       .then(res => this._resStatus(res))
+      .catch(err => console.error(err))
   }
 
   updateUserInfo(name, about) {
@@ -28,6 +29,7 @@ export default class Api {
       })
     })
       .then(res => this._resStatus(res))
+      .catch(err => console.error(err))
   }
 
   updateUserAvatar(avatar) {
@@ -39,6 +41,7 @@ export default class Api {
       })
     })
       .then(res => this._resStatus(res))
+      .catch(err => console.error(err))
   }
 
   getInitialCards() {
@@ -46,6 +49,7 @@ export default class Api {
       headers: this._headers,
     })
       .then(res => this._resStatus(res))
+      .catch(err => console.error(err))
   }
 
   addNewCard(name, link) {
@@ -58,6 +62,7 @@ export default class Api {
       })
     })
       .then(res => this._resStatus(res))
+      .catch(err => console.error(err))
   }
 
   deleteCard(cardId) {
@@ -66,6 +71,7 @@ export default class Api {
       headers: this._headers,
     })
       .then(res => this._resStatus(res))
+      .catch(err => console.error(err))
   }
 
   addLike(cardId) {
@@ -74,6 +80,7 @@ export default class Api {
       headers: this._headers,
     })
       .then(res => this._resStatus(res))
+      .catch(err => console.error(err))
   }
 
   deleteLike(cardId) {
@@ -82,5 +89,6 @@ export default class Api {
       headers: this._headers,
     })
       .then(res => this._resStatus(res))
+      .catch(err => console.error(err))
   }
 }

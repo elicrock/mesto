@@ -43,50 +43,38 @@ Promise.all([api.getInitialCards(), api.getUserInfo()])
     userId = userData._id;
     cardsSection.renderItems(cardsData);
   })
+  .catch(err => {
+    console.error(`Не удалось получить данные. ${err}`);
+  });
 
 const handleSaveFormProfile = ({ 'user-name': userName, 'about': userAbout }) => {
-  popupProfile.renderLoading(true);
-  api.updateUserInfo(userName, userAbout)
+  return api.updateUserInfo(userName, userAbout)
     .then(res => {
       userInfo.setUserInfo(res.name, res.about);
-      popupProfile.close();
     })
     .catch(err => {
-      console.error(err);
+      console.error(`Не удалось сохранить данные пользователя. ${err}`);
     })
-    .finally(() => {
-      popupProfile.renderLoading(false);
-    });
 };
 
 const handleEditAvatar = ({ avatar }) => {
-  popupUpdateAvatar.renderLoading(true);
-  api.updateUserAvatar(avatar)
+  return api.updateUserAvatar(avatar)
     .then(res => {
       userInfo.setUserAvatar(res.avatar);
-      popupUpdateAvatar.close();
     })
     .catch(err => {
-      console.error(err);
+      console.error(`Не удалось сохранить аватар. ${err}`);
     })
-    .finally(() => {
-      popupUpdateAvatar.renderLoading(false);
-    });
 };
 
 const handleAddNewCard = ({ 'place-name': namePlace, 'link': urlPlace }) => {
-  popupAddNewPlace.renderLoading(true);
-  api.addNewCard(namePlace, urlPlace)
+  return api.addNewCard(namePlace, urlPlace)
     .then(cards => {
       cardsSection.addItem(createCard(cards));
-      popupAddNewPlace.close();
     })
     .catch(err => {
-      console.error(err);
+      console.error(`Не удалось создать новую карточку. ${err}`);
     })
-    .finally(() => {
-      popupAddNewPlace.renderLoading(false);
-    });
 };
 
 const popupProfile = new PopupWithForm(popupEditProfile, handleSaveFormProfile);
