@@ -1,7 +1,7 @@
 {
   "name": "mesto",
   "version": "1.0.0",
-  "description": "---",
+  "description": "Учебный проект на курсе веб-разработчик от Яндекс Практикума",
   "main": "./src/pages/index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -9,6 +9,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://elicrock.github.io/mesto/",
   "author": "Paul Ivanov",
   "license": "ISC",
   "devDependencies": {
