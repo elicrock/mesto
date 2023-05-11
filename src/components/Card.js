@@ -30,10 +30,18 @@ export default class Card {
     return this._likes.some(item => item._id === this._userId);
   }
 
+  _toggleLike() {
+    if (this._isUserLike()) {
+      this._likeButton.classList.add('element__like-btn_active');
+    } else {
+      this._likeButton.classList.remove('element__like-btn_active');
+    }
+  }
+
   updateLikes(likes) {
     this._likes = likes;
     this._cardLikes.textContent = likes.length;
-    this._likeButton.classList.toggle('element__like-btn_active');
+    this._toggleLike();
   }
 
   _setEventListeners() {
